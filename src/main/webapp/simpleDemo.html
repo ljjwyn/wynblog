@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+    <link href="ueditor-1.4.3.3/themes/default/_css/ueditor.css" type="text/css" rel="stylesheet">
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor-1.4.3.3/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor-1.4.3.3/_examples/editor_api.js"></script>
+    <script type="text/javascript" src="ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
+    <style type="text/css">
+        h1{
+            font-family: "微软雅黑";
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+<h1>UMEDITOR 简单功能</h1>
+<p>
+    <span class="mathquill-embedded-latex" style="width: 26px; height: 41px;">\frac{3}{4}</span>
+</p>
+<!--style给定宽度可以影响编辑器的最终宽度-->
+<script type="text/plain" id="myEditor" style="width:800px;height:240px;">
+    <p>这里我可以写一些输入提示</p>
+</script>
+<script type="text/javascript">
+var ue = UE.getEditor('myEditor', {
+    autoHeight: false
+});
+console.log(ue);
+// var ue = UE.getContent();
+//对编辑器的操作最好在编辑器ready之后再做
+ue.ready(function() {
+    //设置编辑器的内容
+    ue.setContent('hello');
+    //获取html内容，返回: <p>hello</p>
+    var html = ue.getContent();
+    console.log(html);
+    //获取纯文本内容，返回: hello
+    var txt = ue.getContentTxt();
+    console.log(txt);
+});
+</script>
+</body>
+
+</html>

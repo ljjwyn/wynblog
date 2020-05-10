@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="indexApp">
+<head>
+	<title>wyn博客-主页</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<link rel="stylesheet" href="css/aos.css">
+
+	<link rel="stylesheet" href="css/ionicons.min.css">
+
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
+	<link href="css/sweetalert2.css" rel="stylesheet">
+	<link rel="stylesheet" href="layui-v2.5.6/layui/css/layui.css"  media="all">
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/angular/1.6.3/angular.js"></script>
+	<script src="js/angular/1.6.3/angular-route.js"></script>
+	<script src="js/angular/1.6.3/angular-ui-router.js"></script>
+	<script src="layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="js/ie-emulation-modes-warning.js"></script>
+	<script src="js/sweetalert.min.js"></script>
+	<script src="ng/indexApp.js"></script>
+	<script src="ng/indexCtrl.js"></script>
+</head>
+<body ng-controller="indexCtrl" ng-init="getArticleList()">
+<div id="colorlib-page">
+	<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+	<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+		<h1 id="colorlib-logo"><a href="index.html">wyn<span>.</span></a></h1>
+		<nav id="colorlib-main-menu" role="navigation">
+			<ul>
+				<li class="colorlib-active"><a href="index.html">Home</a></li>
+				<!--<li><a href="photography.html">Photography</a></li>-->
+				<li><a href="articles.html">Articles</a></li>
+				<!--<li><a href="fashion.html">Fashion</a></li>-->
+				<li><a href="about.html">About</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li><a href="login.html">Manager</a></li>
+			</ul>
+		</nav>
+
+		<div class="colorlib-footer">
+			<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				Copyright &copy; made <i class="icon-heart" aria-hidden="true"></i> by<a href="index.html" target="_blank">Jiajie Li</a>
+			<ul>
+				<li><a href="#"><i class="icon-facebook"></i></a></li>
+				<li><a href="#"><i class="icon-twitter"></i></a></li>
+				<li><a href="#"><i class="icon-instagram"></i></a></li>
+				<li><a href="#"><i class="icon-linkedin"></i></a></li>
+			</ul>
+		</div>
+	</aside> <!-- END COLORLIB-ASIDE -->
+	<div id="colorlib-main">
+		<div class="hero-wrap js-fullheight" style="background-image: url({{backgroundPic}});" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="js-fullheight d-flex justify-content-center align-items-center">
+				<div class="col-md-8 text text-center">
+					<div class="img mb-4" style="background-image: url({{imagesUrl}})"></div>
+					<div class="desc">
+						<h2 class="subheading" style="color: #8D8D8D">Hello I'm</h2>
+						<h1 class="mb-4">{{authorName}}</h1>
+						<p class="mb-4" style="color: #8D8D8D">{{authorDescribe}}</p>
+						<p><a href="#" class="btn-custom">More About Me <span class="ion-ios-arrow-forward"></span></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center mb-5 pb-2">
+					<div class="col-md-7 heading-section text-center ftco-animate">
+						<h2 class="mb-4">Articles</h2>
+						<p>A great man once said it is necessary to dill as much as possible, and the more you apply it in real situations, the more natural it will become. </p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4" ng-repeat="result in resultLists">
+						<!--ftco-animate 这是动画，会导致repeat出现无法加载的故障-->
+						<div class="blog-entry">
+							<a href="#" class="img" style="background-image: url({{result.articlesPic}});"></a>
+							<div class="text pt-2 mt-3">
+								<span class="category mb-1 d-block"><a href="#">{{result.articlesLabel}}</a></span>
+								<h3 class="mb-4"><a href="#">{{result.articlesTitle}}</a></h3>
+								<p class="mb-4">{{result.articlesDescribe}}</p>
+								<div class="author mb-4 d-flex align-items-center">
+									<a href="#" class="img" style="background-image: url({{result.authorsPic}});"></a>
+									<div class="ml-3 info">
+										<span>Written by</span>
+										<h3><a href="#">{{result.authorsName}}</a>, <span>{{result.articlesDate}}</span></h3>
+									</div>
+								</div>
+								<div class="meta-wrap d-md-flex align-items-center">
+									<div class="half order-md-last text-md-right">
+										<p class="meta">
+											<span><i class="icon-heart"></i>{{result.articlesHeartCount}}</span>
+											<span><i class="icon-eye"></i>{{result.articlesEyeCount}}</span>
+											<!--<span><i class="icon-comment"></i>5</span>-->
+										</p>
+									</div>
+									<div class="half">
+										<p><a class="btn btn-primary p-3 px-xl-4 py-xl-3" ng-click="getDetail(result.articlesId)">Continue Reading</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="ftco-footer ftco-bg-dark ftco-section">
+			<div class="container px-md-5">
+				<div class="row mb-5">
+					<div class="col-md">
+						<div class="ftco-footer-widget mb-4">
+							<h2 class="ftco-heading-2">Have a Questions?</h2>
+							<div class="block-23 mb-3">
+								<ul>
+									<li><span class="icon icon-map-marker"></span><span class="text">University of Huddersfield Queensgate Huddersfield HD1 3DH Geann</span></li>
+									<li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+									<li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+
+						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script>  made <i class="icon-heart" aria-hidden="true"></i> by <a href="index.html" target="_blank">Jiajie Li</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+<!--<script src="js/jquery.min.js"></script>-->
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<!--<script src="js/jquery.timepicker.min.js"></script>-->
+<script src="js/scrollax.min.js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
+<!--<script src="js/google-map.js"></script>-->
+<script src="js/main.js"></script>
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+    L2Dwidget.init({
+        // 更换模型地址前后都需要修改
+        // 示例:"https://unpkg.com/live2d-widget-model-unitychan/assets/unitychan.model.json"
+        "model": {
+            jsonPath: "https://unpkg.com/live2d-widget-model-hijiki/assets/hijiki.model.json",
+            "scale": 1
+        },
+        // 设置位置
+        "display": {
+            "position": "left",
+            "width": 100,
+            "height": 150,
+            "hOffset": 30,
+            "vOffset": 0
+        },
+        "mobile": {
+            "show": true,
+            "scale": 1.5
+        },
+        // 透明度设置
+        "react": {
+            "opacityDefault": .8,
+            "opacityOnHover": 1
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="indexApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <title>文章管理</title>
+    <!-- Custom CSS -->
+    <link href="dist/css/style.css" rel="stylesheet">
+    <link href="css/sweetalert2.css" rel="stylesheet">
+    <link rel="stylesheet" href="layui-v2.5.6/layui/css/layui.css" media="all">
+    <link href="ueditor-1.4.3.3/themes/default/_css/ueditor.css" type="text/css" rel="stylesheet">
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/angular/1.6.3/angular.js"></script>
+    <script src="js/angular/1.6.3/angular-route.js"></script>
+    <script src="js/angular/1.6.3/angular-ui-router.js"></script>
+    <script src="js/angular/1.6.3/angular-file-upload.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="layui-v2.5.6/layui/layui.js"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor-1.4.3.3/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor-1.4.3.3/_examples/editor_api.js"></script>
+    <script type="text/javascript" src="ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
+    <script src="ng/indexApp.js"></script>
+    <script src="ng/pagesArticlesCtrl.js"></script>
+    <style type="text/css">
+        h1{
+            font-family: "微软雅黑";
+            font-weight: normal;
+        }
+    </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="skin-default-dark fixed-layout" ng-controller="pagesArticlesCtrl">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">文章管理</p>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="pages-profile.html">
+                    <!-- Logo icon --><b>
+                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                    <!-- Dark Logo icon -->
+                    <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                    <!-- Light Logo icon -->
+                    <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                </b>
+                </a>
+                    <!--End Logo icon -->
+                    <!--&lt;!&ndash; Logo text &ndash;&gt;<span>-->
+                    <!--&lt;!&ndash; dark Logo text &ndash;&gt;-->
+                    <!--<img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />-->
+                    <!--&lt;!&ndash; Light Logo text &ndash;&gt;    -->
+                    <!--<img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>-->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-collapse">
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav mr-auto">
+                    <!-- This is  -->
+                    <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                    <!-- ============================================================== -->
+                    <!-- Search -->
+                    <!-- ============================================================== -->
+                    <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                        <form class="app-search">
+                            <input type="text" ng-model="searchtest" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="fa fa-times"></i></a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-nav my-lg-0">
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/logo.jpg" alt="user" class="img-circle" width="30"></a>
+                    </li>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar">
+        <div class="d-flex no-block nav-text-box align-items-center">
+            <span><img src="assets/images/logo-icon.png" alt="elegant admin template"></span>
+            <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
+            <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+        </div>
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li> <a class="waves-effect waves-dark" href="pages-profile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu"></span>基本信息管理</a></li>
+                    <li> <a class="waves-effect waves-dark" href="pages-articles.html" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">文章管理</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="pages-picture.html" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu"></span>图片及其他</a></li>
+                    <li> <a class="waves-effect waves-dark" href="error-404.html" aria-expanded="false"><i class="fa fa-question-circle"></i><span class="hide-menu"></span>测试</a></li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h4 class="text-themecolor">文章管理</h4>
+                </div>
+                <div class="col-md-7 align-self-center text-right">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="pages-profile.html">主页</a></li>
+                            <li class="breadcrumb-item active">文章管理</li>
+                        </ol>
+                        <!--<button type="button" class="btn btn-success d-none d-lg-block m-l-15">人工标注</button>-->
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ==============================================================authorPic  -->
+            <!-- Row -->
+            <div class="row">
+                <!-- Column -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item">
+                                    <a class="{{isactive1}}" ng-click="showManageArticle()">现有文章管理</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="{{isactive2}}" ng-click="showAddArticle()">修改文章</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body" ng-show="manageArticleShow">
+                            <div class="col-md-12">
+                                <div class="card" >
+                                    <div class="card-body">
+                                        <h3 class="card-title">文章管理</h3>
+                                        <table id="demo" lay-filter="test"></table>
+                                        <script type="text/html" id="barDemo">
+                                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                                            <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="edit">编辑</a>
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" ng-show="addArticleShow">
+                            <div class="col-md-8">
+                                <div class="card" style="background-color: rgba(215,213,255,0.35)">
+                                    <div class="card-body">
+                                        <h3 class="card-title">修改文章</h3>
+                                        <form class="form-horizontal form-material">
+                                            <div class="form-group">
+                                                <label style="color: black" class="col-md-12">文章名</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" style="color: #8D8D8D" placeholder="请输入文章名" ng-model="articleTitle" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="color: black" for="category" class="col-md-12">文章类别</label>
+                                                <div class="col-md-3" id="category">
+                                                    <select class="form-control"
+                                                            ng-model="selectedCategory"
+                                                            ng-options="category for category in categoryList">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="color: black" class="col-md-12">日期</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" style="color: #8D8D8D" placeholder="发布日期(eg:May 19 1994)"  ng-model="articleDate" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="color: black" for="idTop1" class="col-md-12">是否置顶</label>
+                                                <div class="col-md-3" id="idTop1">
+                                                    <select class="form-control"
+                                                            ng-model="selectedIsTop"
+                                                            ng-options="isTop for isTop in isTopList">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="color: black" class="col-md-12">文章简介</label>
+                                                <div class="col-md-12">
+                                                    <textarea rows="5" class="form-control form-control-line" placeholder="简介或摘要（必填）" ng-model="articleDescribe"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="color: black" class="col-md-12">文章内容</label>
+                                                <div class="col-md-12">
+                                                    <textarea rows="20" class="form-control form-control-line" placeholder="文章的正文" ng-model="articleContents"></textarea>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group">-->
+                                            <!--<label class="col-sm-12"></label>-->
+                                            <!--<div class="col-sm-12">-->
+                                            <!--<select class="form-control form-control-line">-->
+                                            <!--<option>London</option>-->
+                                            <!--<option>India</option>-->
+                                            <!--<option>Usa</option>-->
+                                            <!--<option>Canada</option>-->
+                                            <!--<option>Thailand</option>-->
+                                            <!--</select>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-success" ng-click="confirm()">确认</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <div class="card-body">
+                                <h3 class="card-title">添加封面图片</h3>
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test1">上传图片</button>
+                                    <div class="layui-upload-list">
+                                        <img style="width: 350px;height: 200px" class="layui-upload-img" id="demo1">
+                                        <p id="demoText"></p>
+                                    </div>
+                                </div>
+                                <input type="file" name="file" id="test20" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- 加载编辑器的容器 -->
+                        <div class="card" >
+                            <div class="card-body">
+                                <h3 class="card-title">添加文章</h3>
+                                <form class="form-horizontal form-material">
+                                    <div class="form-group">
+                                        <label style="color: black" class="col-md-12">文章名</label>
+                                        <div class="col-md-8">
+                                            <input type="text" style="color: #8D8D8D" placeholder="请输入文章名" ng-model="newArticleTitle" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" for="author" class="col-md-12">作者</label>
+                                        <div class="col-md-3" id="author">
+                                            <select class="form-control"
+                                                    ng-model="selectedAuthorName"
+                                                    ng-options="author for author in authorsName">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" for="category1" class="col-md-12">文章类别</label>
+                                        <div class="col-md-3" id="category1">
+                                            <select class="form-control"
+                                                    ng-model="selectedCategory"
+                                                    ng-options="category for category in categoryList">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" class="col-md-12">日期</label>
+                                        <div class="col-md-8">
+                                            <input type="text" style="color: #8D8D8D" placeholder="发布日期(eg:May 19 1994)"  ng-model="newArticleDate" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" for="idTop" class="col-md-12">是否置顶</label>
+                                        <div class="col-md-3" id="idTop">
+                                            <select class="form-control"
+                                                    ng-model="selectedIsTop"
+                                                    ng-options="isTop for isTop in isTopList">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" class="col-md-12">文章简介</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" class="form-control form-control-line" placeholder="简介或摘要（必填）" ng-model="newArticleDescribe"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black" class="col-md-12">文章内容</label>
+                                        <div class="col-md-12">
+                                            <script id="container" name="content" type="text/plain">请输入文章正文</script>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-success" ng-click="confirmAdd()">确认</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Row -->
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer">
+        Copyright &copy; Jiajie Li 2020
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="js/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="js/node_modules/popper/popper.min.js"></script>
+<script src="js/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
+<!--Wave Effects -->
+<script src="dist/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="dist/js/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="js/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="js/node_modules/sparkline/jquery.sparkline.min.js"></script>
+<!--Custom JavaScript -->
+<script src="dist/js/custom.min.js"></script>
+</body>
+
+</html>
